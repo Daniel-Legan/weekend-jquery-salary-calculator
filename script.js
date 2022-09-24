@@ -31,7 +31,7 @@ function addEmployee(event){
     employees.push(employee);
 
     console.log('employees is', employees);
-
+    //update color chancge on add
     render();
 }
 
@@ -45,7 +45,7 @@ function render(){
                 <td>${employee.lastName}</td>
                 <td>${employee.Id}</td>
                 <td>${employee.title}</td>
-                <td>${employee.annualSalary}</td>
+                <td>$${employee.annualSalary}</td>
                 <td>
                     <button class="deleteButton">Delete Button</button>
                 </td>
@@ -55,7 +55,7 @@ function render(){
     }
 
     $('#totalMonthly').text(`
-        Total Monthly: ${(totalMonthly(employees))}
+        Total Monthly: $${(totalMonthly(employees).toFixed(2))}
     `)
 }
 
@@ -69,12 +69,16 @@ function deletePress() {
         if(employee.uniqueID === Number($(this).parent().parent()[0].id)){
             console.log('found');
             employeeToRemove = employee;
+            console.log('the employee to remove', employeeToRemove);
         }
     }
     //splice out the specific object
-    employees.splice(employeeToRemove, 1);
-    console.log('employees is', employees);
+    //what index?
+    console.log(employees.indexOf(employeeToRemove));
 
+    employees.splice(employees.indexOf(employeeToRemove), 1);
+    console.log('employees array', employees);
+    //update color change on delete
     render();
 }
 

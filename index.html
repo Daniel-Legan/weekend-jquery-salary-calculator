@@ -10,6 +10,37 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>in HTML</h2>
+    <header>
+        <h1>Salary Calculator</h1>
+    </header>
+    <h2>Add Employee</h2>
+    <!-- FORM HERE -->
+    <form id="employeeForm">
+            <input id="firstNameInput" type="text" placeholder="First Name">
+            <input id="lastNameInput" type="text" placeholder="Last Name">
+            <input id="idInput" type="text" placeholder="ID">
+            <input id="titleInput" type="text" placeholder="Title">
+            <input id="annualSalaryInput" type="text" placeholder="Annual Salary">
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+    </form>
+    <h2>Employees</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Firtst Name</th>
+                <th>Last Name</th>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Annual Salary</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            
+        </tbody>
+    </table>
+    <h2>Total Monthly</h2>
 </body>
 </html>

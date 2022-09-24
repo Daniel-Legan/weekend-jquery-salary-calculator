@@ -19,6 +19,17 @@ function addEmployee(event){
 
     event.preventDefault();
 
+    if(
+        $('#firstNameInput').val() === '' ||
+        $('#lastNameInput').val() === '' ||
+        $('#idInput').val() === '' ||
+        $('#titleInput').val() === ''||
+        $('#annualSalaryInput').val() === ''
+        ){
+            alert('Missing Values');
+            return;
+        }
+
     let employee = {
         firstName: $('#firstNameInput').val(),
         lastName: $('#lastNameInput').val(),
@@ -27,11 +38,18 @@ function addEmployee(event){
         annualSalary: Number($('#annualSalaryInput').val()),
         uniqueID: Math.random()
     }
+
     console.log('employee is', employee);
 
     employees.push(employee);
 
     console.log('employees is', employees);
+
+    $('#firstNameInput').val('');
+    $('#lastNameInput').val('');
+    $('#idInput').val('');
+    $('#titleInput').val('');
+    $('#annualSalaryInput').val('');
 
     render();
 }
@@ -102,9 +120,8 @@ function doNotExceedColor(){
     if(totalMonthly(employees) > notToExceedTotalMonthly){
         $('#totalMonthly').css('background-color', 'red');
     } else {
-        if(totalMonthly(employees) < notToExceedTotalMonthly){
+        if(totalMonthly(employees) <= notToExceedTotalMonthly){
             $('#totalMonthly').css('background-color', 'white');
         }
     }
 }
-

@@ -2,7 +2,7 @@ console.log('in script.js');
 
 let employees = [];
 let sum = 0;
-let globalTotalMonthly = 0;
+
 
 $(document).ready(readyNow);
 
@@ -14,17 +14,17 @@ function readyNow(){
 }
 
 function addEmployee(event){
+    console.log('in addEmployee');
 
     event.preventDefault();
-
-    console.log('in addEmployee');
 
     let employee = {
         firstName: $('#firstNameInput').val(),
         lastName: $('#lastNameInput').val(),
         Id: $('#idInput').val(),
         title: $('#titleInput').val(),
-        annualSalary: Number($('#annualSalaryInput').val())
+        annualSalary: Number($('#annualSalaryInput').val()),
+        uniqueID: Math.random()
     }
     console.log('employee is', employee);
 
@@ -40,46 +40,53 @@ function render(){
 
     for(let employee of employees){
         $('#tableBody').append(`
-            <tr>
+            <tr id='${employee.uniqueID}'>
                 <td>${employee.firstName}</td>
                 <td>${employee.lastName}</td>
                 <td>${employee.Id}</td>
                 <td>${employee.title}</td>
                 <td>${employee.annualSalary}</td>
-                <td><button class="deleteButton">Delete Button</button></td>
+                <td>
+                    <button class="deleteButton">Delete Button</button>
+                </td>
             </tr>
         `);
+        console.log('employee unique id', employee.uniqueID);
     }
 
     $('#totalMonthly').text(`
-        Total Monthly: ${(totalMonthly(employees))/12}
+        Total Monthly: ${(totalMonthly(employees))}
     `)
-
-    globalTotalMonthly = totalMonthly(employees)/12;
 }
 
 function deletePress() {
     console.log('in deletePress', $(this));
-    console.log(globalTotalMonthly);
-    console.log("$(this).parent().parent():nth-child(5)");
+    console.log($(this).parent().parent()[0].id);
+    employeeToRemove = 0;
 
-    $(this).parent().parent().remove();
+    //find in the array the object with the unique id
+    for(let employee of employees){
+        if(employee.uniqueID === Number($(this).parent().parent()[0].id)){
+            console.log('found');
+            employeeToRemove = employee;
+        }
+    }
+    //splice out the specific object
+    employees.splice(employeeToRemove, 1);
+    console.log('employees is', employees);
 
-    // $('#totalMonthly').text(`
-    // Total Monthly: ${globalTotalMonthly - $(this).parent().parent()}
-    // `)
-
-    $('#totalMonthly').text(`
-    Total Monthly: ${globalTotalMonthly - $(this).parent().parent()}
-    `)
+    render();
 }
 
 function totalMonthly(arr){
     sum = 0;
-    console.log(sum);
+
     for(let employee of arr){
         sum += employee.annualSalary;
     }
-    return sum;
+
+    console.log('total sum', sum);
+
+    return sum/12;
 }
 

@@ -2,6 +2,7 @@ console.log('in script.js');
 
 let employees = [];
 let sum = 0;
+const notToExceedTotalMonthly = 20000;
 
 
 $(document).ready(readyNow);
@@ -31,7 +32,7 @@ function addEmployee(event){
     employees.push(employee);
 
     console.log('employees is', employees);
-    //update color chancge on add
+
     render();
 }
 
@@ -57,6 +58,8 @@ function render(){
     $('#totalMonthly').text(`
         Total Monthly: $${(totalMonthly(employees).toFixed(2))}
     `)
+    
+    doNotExceedColor();
 }
 
 function deletePress() {
@@ -78,7 +81,7 @@ function deletePress() {
 
     employees.splice(employees.indexOf(employeeToRemove), 1);
     console.log('employees array', employees);
-    //update color change on delete
+
     render();
 }
 
@@ -92,5 +95,16 @@ function totalMonthly(arr){
     console.log('total sum', sum);
 
     return sum/12;
+}
+
+function doNotExceedColor(){
+    console.log('in doNotExceed');
+    if(totalMonthly(employees) > notToExceedTotalMonthly){
+        $('#totalMonthly').css('background-color', 'red');
+    } else {
+        if(totalMonthly(employees) < notToExceedTotalMonthly){
+            $('#totalMonthly').css('background-color', 'white');
+        }
+    }
 }
 

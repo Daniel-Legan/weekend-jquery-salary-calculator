@@ -3,6 +3,10 @@ console.log('in script.js');
 let employees = [];
 let sum = 0;
 const notToExceedTotalMonthly = 20000;
+var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
 
 
 $(document).ready(readyNow);
@@ -64,9 +68,9 @@ function render(){
                 <td>${employee.lastName}</td>
                 <td>${employee.Id}</td>
                 <td>${employee.title}</td>
-                <td>$${employee.annualSalary}</td>
+                <td>${formatter.format(employee.annualSalary)}</td>
                 <td>
-                    <button class="deleteButton">Delete Button</button>
+                    <button class="deleteButton">Delete</button>
                 </td>
             </tr>
         `);
@@ -74,7 +78,7 @@ function render(){
     }
 
     $('#totalMonthly').text(`
-        Total Monthly: $${(totalMonthly(employees).toFixed(2))}
+        Total Monthly: ${formatter.format(totalMonthly(employees))}
     `)
     
     doNotExceedColor();

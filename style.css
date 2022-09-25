@@ -12,9 +12,69 @@ table {
 th, td {
     text-align: left;
     padding: 8px;
-}   
+}
+
+td:last-child {
+    text-align: center;
+}
+
+td {
+    border-color: black;
+    border-style: solid;
+}
 
 th {
     background-color: grey;
     color: white;
+    text-align: left;
+    border-style: solid;
+    border-color: black;
+}
+
+th:last-child {
+    border-right-color: black;
+    border-left-color: grey;
+    border-top-color: black;
+    border-bottom-color: black;
+}
+
+th:nth-child(5) {
+    border-right-color: grey;
+}
+
+td:nth-child(5) {
+    text-align: right;
+}
+
+#totalMonthly {
+    text-align: right;
+}
+
+#submitButton {
+    text-align: right;
+    padding-top: 1em;
+    padding-right: 1em;
+}
+
+.inputForm {
+    display: flex;
+    justify-content: space-around;
+}
+
+.inputForm > input {
+    justify-content: space-around;
+    width: 18%;
+    line-height: 25px;
+    border-color: black;
+}
+
+button {
+    line-height: 25px;
+    width: 150px;
+    border-radius: 10px;
+}
+
+.deleteButton {
+    width: 50%;
+    text-align: center;
 }
